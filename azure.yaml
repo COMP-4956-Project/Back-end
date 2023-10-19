@@ -1,4 +1,4 @@
-﻿name: Keep clone up to date
+name: Keep clone up to date
 variables:
   REMOTE_ADDR: 'https://github.com/COMP-4956-Project/MVC-Backend-Frontend.git'
 stages:
