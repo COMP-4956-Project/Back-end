@@ -1,0 +1,133 @@
+{
+  "blocks": [
+    {
+      "type": "function",
+      "field": "operation",
+      "operation": "assign_variable",
+      "A": {
+        "type": "variable",
+        "name": "index_i"
+      },
+      "B": {
+        "type": "value",
+        "field": "num",
+        "num": 0
+      }
+    },
+    {
+      "type": "control",
+      "instruction": "while",
+      "input": {
+        "type": "logic",
+        "logic": "less",
+        "A": {
+          "type": "variable",
+          "name": "index_i"
+        },
+        "B": {
+          "type": "value",
+          "field": "num",
+          "num": 5
+        }
+      },
+      "children": [
+        {
+          "type": "function",
+          "instruction": "print",
+          "input": {
+            "type": "value",
+            "field": "text",
+            "text": "hello world"
+          }
+        },
+        {
+          "type": "function",
+          "field": "operation",
+          "operation": "assign_add",
+          "A": {
+            "type": "variable",
+            "name": "index_i"
+          },
+          "B": {
+            "type": "value",
+            "field": "num",
+            "num": 1
+          }
+        },
+        {
+          "type": "function",
+          "field": "operation",
+          "operation": "assign_variable",
+          "A": {
+            "type": "variable",
+            "name": "index_j"
+          },
+          "B": {
+            "type": "value",
+            "field": "num",
+            "num": 0
+          }
+        },
+        {
+          "type": "control",
+          "instruction": "while",
+          "input": {
+            "type": "logic",
+            "logic": "less",
+            "A": {
+              "type": "variable",
+              "name": "index_j"
+            },
+            "B": {
+              "type": "value",
+              "field": "num",
+              "num": 5
+            }
+          },
+          "children": [
+            {
+              "type": "function",
+              "instruction": "print",
+              "input": {
+                "type": "value",
+                "field": "operation",
+                "operation": "add",
+                "A": {
+                  "type": "variable",
+                  "name": "index_i"
+                },
+                "B": {
+                  "type": "variable",
+                  "name": "index_j"
+                }
+              }
+            },
+            {
+              "type": "function",
+              "field": "operation",
+              "operation": "assign_add",
+              "A": {
+                "type": "variable",
+                "name": "index_j"
+              },
+              "B": {
+                "type": "value",
+                "field": "num",
+                "num": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "instruction": "print",
+      "input": {
+        "type": "value",
+        "field": "text",
+        "text": "hello world"
+      }
+    }
+  ]
+}
