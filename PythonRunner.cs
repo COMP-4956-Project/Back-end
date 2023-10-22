@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using IronPython.Hosting;
+using MVC_Backend_Frontend;
+using MVC_Backend_Frontend.Models;
 
 namespace Backend
 {
     public class PythonRunner
     {
-
-        string output = string.Empty;
 
         public PythonRunner()
         {
@@ -61,6 +62,25 @@ namespace Backend
                 capturedOutput = reader.ReadToEnd();
             }
             return capturedOutput;
+        }
+
+        public string RunFromJson(string json)
+        {
+            Blocks? JSONcode = JsonSerializer.Deserialize<Blocks>(json);
+            Console.WriteLine("=====================CODE=====================");
+            string code = "";
+            if (JSONcode != null)
+            {
+                foreach (var block in JSONcode.blocks)
+                {
+                    code += JsonParser.Parse(block) + "\n";
+                }
+            }
+            Console.WriteLine(code);
+            Console.WriteLine("====================RESULT====================");
+            var result = RunFromString(code);
+            Console.WriteLine(result);
+            return result;
         }
 
     }

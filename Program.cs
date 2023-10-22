@@ -1,3 +1,4 @@
+using Backend;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC_Backend_Frontend;
@@ -6,20 +7,9 @@ using MVC_Backend_Frontend.Models;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-string text = File.ReadAllText(@"./test2.json");
-Console.WriteLine("=====================JSON=====================");
-Console.WriteLine(text);
-Blocks? JSONcode = JsonSerializer.Deserialize<Blocks>(text);
-Console.WriteLine("=====================CODE=====================");
-string code = "";
-if (JSONcode != null)
-{
-    foreach (var block in JSONcode.blocks)
-    {
-        code += JsonParser.Parse(block) + "\n";
-    }
-}
-Console.WriteLine(code);
+string json = File.ReadAllText(@"./test3.json");
+var pythonRunner = new PythonRunner();
+pythonRunner.RunFromJson(json);
 
 var builder = WebApplication.CreateBuilder(args);
 
