@@ -13,35 +13,6 @@ namespace Backend
     public class PythonRunner
     {
 
-        public PythonRunner()
-        {
-        }
-
-        public string RunFromFile(string path, string input)
-        {
-            var engine = Python.CreateEngine();
-            var scope = engine.CreateScope();
-
-            // Redirect the standard output to capture Python's print statements
-            var outputStream = new MemoryStream();
-            var inputStream = new MemoryStream(Encoding.Default.GetBytes(input));
-
-            engine.Runtime.IO.SetOutput(outputStream, Encoding.Default);
-            engine.Runtime.IO.SetInput(inputStream, Encoding.Default);
-
-            var sourceCode = engine.CreateScriptSourceFromFile(path);
-            sourceCode.Execute(scope);
-
-            // Retrieve the captured output
-            outputStream.Position = 0; // Reset the stream position
-            string capturedOutput;
-            using (var reader = new StreamReader(outputStream, Encoding.Default))
-            {
-                capturedOutput = reader.ReadToEnd();
-            }
-            return capturedOutput;
-        }
-
         public string RunFromString(string code)
         {
             var engine = Python.CreateEngine();
@@ -64,14 +35,13 @@ namespace Backend
             return capturedOutput;
         }
 
-        public string RunFromJson(string json)
+        public string RunFromBlockList(BlockList blocklist)
         {
-            Blocks? JSONcode = JsonSerializer.Deserialize<Blocks>(json);
             Console.WriteLine("=====================CODE=====================");
             string code = "";
-            if (JSONcode != null)
+            if (blocklist != null)
             {
-                foreach (var block in JSONcode.blocks)
+                foreach (var block in blocklist.blocks)
                 {
                     code += JsonParser.Parse(block) + "\n";
                 }

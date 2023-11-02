@@ -9,7 +9,7 @@ using System.Text.Json.Nodes;
 
 string json = File.ReadAllText(@"./test3.json");
 var pythonRunner = new PythonRunner();
-pythonRunner.RunFromJson(json);
+pythonRunner.RunFromBlockList(JsonSerializer.Deserialize<BlockList>(json)!);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +47,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
 
 app.Run();
